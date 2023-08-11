@@ -25,7 +25,7 @@ module.exports = class extends Client {
             partials: [Object.keys(Partials)],
             presence: {
                 activities: [{
-                    name: 'DiscordJS-V14-Bot-Template v2'
+                    name: 'TownLeaks Bot'
                 }]
             }
         });
@@ -37,7 +37,7 @@ module.exports = class extends Client {
         components(this);
         if (config.handler.mongodb.toggle) mongoose();
 
-        await this.login(process.env.CLIENT_TOKEN || config.client.token);
+        await this.login(process.env.CLIENT_TOKEN ??  config.client.token);
 
         if (config.handler.deploy) deploy(this, config);
     };
