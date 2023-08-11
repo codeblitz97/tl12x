@@ -39,6 +39,17 @@ module.exports = {
         let command = client.collection.prefixcommands.get(commandInput) || client.collection.prefixcommands.get(client.collection.aliases.get(commandInput));
 
         if (command) {
+                if(command.developers) {
+        if(!config.user.developers.includes(message.author.id)) {
+          return message.reply({ content: "You are not permitted to use this command. Only developers can use this command." })
+        }
+      }
+
+      if(command.admins) {
+        if(!config.user.admins.includes(message.author.id)) {
+          return message.reply({ content: "You are not permitted to use this command. Only admins can use this command." })
+        }
+    }
             try {
                 if (command.structure?.permissions && !message.member.permissions.has(command.structure?.permissions)) {
                     await message.reply({
