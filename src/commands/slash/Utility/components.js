@@ -2,6 +2,7 @@ const { ChatInputCommandInteraction, SlashCommandBuilder, ActionRowBuilder, Butt
 const ExtendedClient = require('../../../class/ExtendedClient');
 
 module.exports = {
+    admins: true,
     structure: new SlashCommandBuilder()
         .setName('components')
         .setDescription('Test the components handler.'),
