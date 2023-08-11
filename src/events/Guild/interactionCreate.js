@@ -19,6 +19,18 @@ module.exports = {
 
         if (!command) return;
 
+      if(command.developers) {
+        if(!config.user.developers.includes(interaction.user.id)) {
+          return interaction.reply({ content: "You are not permitted to use this command. Only developers can use this command.", ephemeral: true })
+        }
+      }
+
+      if(command.admins) {
+        if(!config.user.admins.includes(interaction.user.id)) {
+          return interaction.reply({ content: "You are not permitted to use this command. Only admins can use this command.", ephemeral: true })
+        }
+      }
+
         try {
             command.run(client, interaction);
         } catch (error) {
