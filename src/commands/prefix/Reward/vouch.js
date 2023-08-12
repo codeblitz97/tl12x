@@ -15,8 +15,13 @@ module.exports = {
      * @param {[String]} args 
      */
     run: async (client, message, args) => {
+
+      const adminChannel = client.channels.cache.get("1139542852490252359");
       let mention = message.mentions.users.first();
     if (!mention) return message.channel.send({content: 'You need to mention a user. i.e: `tlvouch @{user}`'});
+
+      const product = args[1];
+      const opinion = args.slice(2).join(" ");
       if(config.user.admins.includes(message.author.id)) {
         return message.reply({ content: "You are an admin and you cannot vouch."});
       }
@@ -29,7 +34,7 @@ module.exports = {
             if (!globalVouchRecord) {
                 const newGlobalVouchRecord = new VouchSchema({
                     userId: mention.id,
-                    totalVouch: 1
+                    totalVouch: 0
                 });
                 await newGlobalVouchRecord.save();
             } else {
@@ -39,6 +44,7 @@ module.exports = {
 
           console.log(globalVouchRecord);
             await message.channel.send({ content: `Thanks for vouching <@${mention.id}> ${message.member.displayName}! Now ${mention.displayName} has ${globalVouchRecord.totalVouch} vouches`});
+          await adminChannel.send({ content: `${message.member.displayName} vouched ${mention.id} now ${mention.displayName} has ${globalVouchRecord.totalVouch} vouches.\n> **Item sold:** \`${product}\`\n> **Users Review:** "**${opinion}**"` })
         } catch (error) {
             console.error(error);
         }
