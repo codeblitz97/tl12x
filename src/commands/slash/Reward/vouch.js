@@ -124,7 +124,7 @@ module.exports = {
           {
             name: "__Vouched Information__",
             value: `**\`•\` Vouched**: <@${vouched}>
-**\`•\` Vouchs**: **\`${rating}\`**`
+**\`•\` Vouches**: **\`${globalVouchRecord.totalVouch}\`**`
           },
           {
             name: "__Experience__",
